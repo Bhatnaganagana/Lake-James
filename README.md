@@ -7,9 +7,11 @@ Shiny App
   - shinydashboard
   - tidyverse
   - DT
-  - caret
-  - ggfortify
+  - dplyr
+  - ggplot2
   - plotly
+  - corrplot
+  - zoo
 
 Use this line of code to install all required packages:
 
@@ -19,5 +21,5 @@ install.packages(c("shiny", "shinydashboard", "tidyverse", "DT", "ggplot2", "dpl
 
 # Run the Shiny app from your R studio
 
-Use `shiny::runGitHub("ST558_project_3", "snprim", ref = "main", subdir
-= "breastCancer")` to run the app in your Rstudio.
+Use `shiny::runGitHub("Lake-James", "Bhatnaganagana", ref = "main", subdir
+= "LJEAdata")` to run the app in your Rstudio.
