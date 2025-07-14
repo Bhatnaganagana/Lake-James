@@ -560,20 +560,21 @@ server <- function(input, output, session) {
       theme_minimal() +
       theme(panel.border = element_rect(colour = "black", fill = NA, linewidth = 1))
     
-    # Add pristine avg line if the input from the user matches a variable defined in the pristine averages global key. Also use !NA because some chemical data variables don't have a value for pristine avg
+    # Add pristine avg line if the input from the user matches a variable defined in the pristine averages global key. 
+    # Also use !NA because some chemical data variables don't have a value for pristine avg
     if (input$show_avg && input$variable_chem %in% names(pristine_avgs)) {
       pristine_value <- pristine_avgs[[input$variable_chem]]
       regional_value <- regional_avgs[[input$variable_chem]]
       
-      if (!is.na(pristine_value)) {
-        p <- p + geom_hline(yintercept = pristine_value, linetype = "dashed", color = "#F08080") +
+      if (!is.na(pristine_value)) { # used geom_hline and defined the line to have no slope (y-int at pristine_value) and then all y's at that point
+        p <- p + geom_hline(yintercept = pristine_value, linetype = "dashed", color = "#F08080") + # Set a pastelish color code that matches with LJEA branding
           annotate("text", x = min(data$date), y = pristine_value, label = "Pristine Avg", vjust = -1, hjust = 0, color = "#F08080", size = 3)
-      }
+      } # the -1 makes it so that the text lays on top of the value 
       
       if (!is.na(regional_value)) {
         p <- p + geom_hline(yintercept = regional_value, linetype = "dotdash", color = "darkblue") +
           annotate("text", x = min(data$date), y = regional_value, label = "Regional Avg", vjust = 1.5, hjust = 0, color = "darkblue", size = 3)
-      }
+      } # the 1.5 makes it so the text lays below the line value 
     }
     
     # Return final plot
